@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
+import authRoutes from './routes/authRoutes.js'
+import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
 
@@ -12,9 +14,21 @@ const PORT = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 
+// Authentication routes
+app.use('/api/auth', authRoutes)
+
+
 // Test route
 app.get('/', (req, res) => {
     res.send('Thrive Backend is running successfully! 💰')
+})
+
+// Protected test route
+app.get('/api/auth/protected', authMiddleware, (req, res) => {
+    res.status(200).json({
+        message: 'Access granted! You are authenticated.',
+        userId: req.user.userId
+    })
 })
 
 // Start the server
