@@ -3,6 +3,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
+import transactionRoutes from './routes/transactionRoutes.js'
+
 import authMiddleware from './middleware/authMiddleware.js'
 
 dotenv.config()
@@ -16,6 +18,9 @@ app.use(express.json())
 
 // Authentication routes
 app.use('/api/auth', authRoutes)
+
+// Transaction routes
+app.use('/api/transactions', transactionRoutes)
 
 
 // Test route
