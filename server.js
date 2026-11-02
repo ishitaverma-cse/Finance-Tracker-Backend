@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import transactionRoutes from './routes/transactionRoutes.js'
+import budgetRoutes from './routes/budgetRoutes.js'
 
 import authMiddleware from './middleware/authMiddleware.js'
 
@@ -22,6 +23,8 @@ app.use('/api/auth', authRoutes)
 // Transaction routes
 app.use('/api/transactions', transactionRoutes)
 
+// Budget routes
+app.use('/api/budgets', budgetRoutes)
 
 // Test route
 app.get('/', (req, res) => {
